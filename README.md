@@ -1,4 +1,4 @@
-# Job Portal Frontend
+# Job Portal
 
 This repository contains the frontend code for the Job Portal project.
 
@@ -12,7 +12,7 @@ To get started with the project, follow these steps:
     ```
 2. Navigate to the project directory:
     ```sh
-    cd jobportal-frontend
+    cd jobportal
     ```
 3. Install the dependencies:
     ```sh
