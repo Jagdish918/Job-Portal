@@ -14,66 +14,76 @@ import AdminJobs from "./components/admin/AdminJobs";
 import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/ProtectedRoute'
+import Dashboard from './components/Dashboard'
+import AdminDashboard from './components/admin/AdminDashboard'
+import UserManagement from './components/admin/UserManagement'
+import ScrollToTop from './components/shared/ScrollToTop'
 
+
+const PageWrapper = ({ children }) => (
+  <>
+    <ScrollToTop />
+    {children}
+  </>
+);
 
 const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: <Home />
+    element: <PageWrapper><Home /></PageWrapper>
   },
   {
     path: '/login',
-    element: <Login />
+    element: <PageWrapper><Login /></PageWrapper>
   },
   {
     path: '/signup',
-    element: <Signup />
+    element: <PageWrapper><Signup /></PageWrapper>
   },
   {
     path: "/jobs",
-    element: <Jobs />
+    element: <PageWrapper><Jobs /></PageWrapper>
   },
   {
     path: "/description/:id",
-    element: <JobDescription />
-  },
-  {
-    path: "/browse",
-    element: <Browse />
+    element: <PageWrapper><JobDescription /></PageWrapper>
   },
   {
     path: "/profile",
-    element: <Profile />
+    element: <PageWrapper><Profile /></PageWrapper>
   },
   // admin ke liye yha se start hoga
   {
+    path:"/admin/dashboard",
+    element: <ProtectedRoute><PageWrapper><AdminDashboard/></PageWrapper></ProtectedRoute>
+  },
+  {
     path:"/admin/companies",
-    element: <ProtectedRoute><Companies/></ProtectedRoute>
+    element: <ProtectedRoute><PageWrapper><Companies/></PageWrapper></ProtectedRoute>
   },
   {
     path:"/admin/companies/create",
-    element: <ProtectedRoute><CompanyCreate/></ProtectedRoute> 
+    element: <ProtectedRoute><PageWrapper><CompanyCreate/></PageWrapper></ProtectedRoute> 
   },
   {
     path:"/admin/companies/:id",
-    element:<ProtectedRoute><CompanySetup/></ProtectedRoute> 
+    element:<ProtectedRoute><PageWrapper><CompanySetup/></PageWrapper></ProtectedRoute> 
   },
   {
     path:"/admin/jobs",
-    element:<ProtectedRoute><AdminJobs/></ProtectedRoute> 
+    element:<ProtectedRoute><PageWrapper><AdminJobs/></PageWrapper></ProtectedRoute> 
   },
   {
     path:"/admin/jobs/create",
-    element:<ProtectedRoute><PostJob/></ProtectedRoute> 
+    element:<ProtectedRoute><PageWrapper><PostJob/></PageWrapper></ProtectedRoute> 
   },
   {
     path:"/admin/jobs/:id/applicants",
-    element:<ProtectedRoute><Applicants/></ProtectedRoute> 
+    element:<ProtectedRoute><PageWrapper><Applicants/></PageWrapper></ProtectedRoute> 
   },
-
 ])
-function App() {
 
+function App() {
   return (
     <div>
       <RouterProvider router={appRouter} />

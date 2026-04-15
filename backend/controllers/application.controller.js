@@ -1,5 +1,6 @@
 import { Application } from "../models/application.model.js";
 import { Job } from "../models/job.model.js";
+import { Notification } from "../models/notification.model.js";
 
 export const applyJob = async (req, res) => {
     try {
@@ -43,6 +44,10 @@ export const applyJob = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false
+        });
     }
 };
 export const getAppliedJobs = async (req,res) => {
@@ -68,6 +73,10 @@ export const getAppliedJobs = async (req,res) => {
         })
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false
+        });
     }
 }
 // admin dekhega kitna user ne apply kiya hai
@@ -87,12 +96,24 @@ export const getApplicants = async (req,res) => {
                 success:false
             })
         };
+
+        if(job.created_by.toString() !== req.id){
+            return res.status(403).json({
+                message:'You are not authorized to view these applicants.',
+                success:false
+            })
+        }
+
         return res.status(200).json({
             job, 
             succees:true
         });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false
+        });
     }
 }
 export const updateStatus = async (req,res) => {
@@ -115,9 +136,27 @@ export const updateStatus = async (req,res) => {
             })
         };
 
+        // Create notification and verify ownership
+        const job = await Job.findById(application.job);
+        
+        if (!job || job.created_by.toString() !== req.id) {
+            return res.status(403).json({
+                message: "You are not authorized to update this application.",
+                success: false
+            });
+        }
+
         // update the status
         application.status = status.toLowerCase();
         await application.save();
+
+        const companyName = job?.company?.name || "The company"; // Optional fallback
+        
+        await Notification.create({
+            userId: application.applicant,
+            jobId: application.job,
+            message: `Your application for ${job?.title} has been ${status.toLowerCase()}.`
+        });
 
         return res.status(200).json({
             message:"Status updated successfully.",
@@ -126,5 +165,9 @@ export const updateStatus = async (req,res) => {
 
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false
+        });
     }
 }

@@ -1,43 +1,104 @@
-# Job Portal
+# 🚀 Job Portal - Modern Recruitment Platform
 
-This repository contains the frontend code for the Job Portal project.
+A full-stack (MERN) recruitment platform designed for seamless job searching and hiring. Featuring a sleek, dark-mode compatible UI, real-time tracking, and role-based dashboards.
 
-## Getting Started
+---
 
-To get started with the project, follow these steps:
+## ✨ Key Features
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/yourusername/jobportal-frontend.git
-    ```
-2. Navigate to the project directory:
-    ```sh
-    cd jobportal
-    ```
-3. Install the dependencies:
-    ```sh
-    npm install
-    ```
-4. Start the development server:
-    ```sh
-    npm start
-    ```
+### 👤 For Candidates
+- **Smart Search**: Filter jobs by title, description, and keywords.
+- **Micro-interactions**: Fluid animations using Framer Motion for a premium feel.
+- **Candidate Dashboard**: Track application status (Pending, Accepted, Rejected) in real-time.
+- **Saved Jobs**: Bookmark interesting listings for future applications.
+- **Sleek Profiles**: Manage your skills, bio, and resume with ease.
 
-## Project Structure
+### 🏢 For Recruiters (Admin)
+- **Recruiter Dashboard**: High-level overview of postings and applicant performance.
+- **Company Management**: Create and manage multiple business profiles.
+- **Job Posting**: Post new openings with requirements and location details.
+- **Applicant Tracking**: Review and update the status of incoming applications.
 
-- `src/` - Contains the source code for the frontend.
-- `public/` - Contains the public assets.
-- `package.json` - Contains the project dependencies and scripts.
+---
 
-## Contributing
+## 🛠️ Tech Stack
 
-We welcome contributions to the project. Please follow these steps to contribute:
+- **Frontend**: React, Redux Toolkit, Tailwind CSS, shadcn/ui, Framer Motion.
+- **Backend**: Node.js, Express.js.
+- **Database**: MongoDB (Mongoose).
+- **Validation**: Zod (Backend schema validation).
+- **Authentication**: JWT (JSON Web Tokens) with HTTP-only cookies.
+- **Image Uploads**: Cloudinary integration.
 
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Commit your changes and push the branch to your fork.
-4. Create a pull request with a description of your changes.
+---
 
-## License
+## 🚀 Getting Started
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+### Prerequisites
+- Node.js installed
+- MongoDB URI
+- Cloudinary Credentials (for image uploads)
+
+### Setup
+
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/Jagdish918/Job-Portal.git
+   cd Job-Portal
+   ```
+
+2. **Backend Configuration**:
+   - Create a `.env` file in the `backend/` directory:
+     ```env
+     PORT=8000
+     MONGO_URI=your_mongodb_uri
+     SECRET_KEY=your_jwt_secret
+     CLOUD_NAME=your_cloudinary_name
+     API_KEY=your_cloudinary_api_key
+     API_SECRET=your_cloudinary_api_secret
+     ```
+   - Install dependencies and start:
+     ```sh
+     cd backend
+     npm install
+     npm run dev
+     ```
+
+3. **Frontend Configuration**:
+   - Navigate to the `frontend/` directory and install dependencies:
+     ```sh
+     cd ../frontend
+     npm install
+     npm run dev
+     ```
+
+---
+
+## 📂 Project Structure
+
+```text
+├── backend/            # Express.js Server & MongoDB Models
+│   ├── controllers/    # API Request Handlers
+│   ├── models/         # Database Schemas
+│   ├── routes/         # API Route Definitions
+│   └── utils/          # Validation & Database connection
+├── frontend/           # React Application
+│   ├── src/
+│   │   ├── components/ # UI Components (shadcn/ui, shared)
+│   │   ├── hooks/      # Custom React Hooks
+│   │   ├── redux/      # Redux Toolkit Slices
+│   │   └── utils/      # Constants & Helpers
+```
+
+---
+
+## 🌟 Quality Standards
+- **Dark Mode**: Fully supports systems color preferences.
+- **Responsive**: Mobile-first design grid for all screen sizes.
+- **Performant**: Backend pagination for large job listings.
+- **Secure**: Robust input validation and HTTP-only cookie tokens.
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.
